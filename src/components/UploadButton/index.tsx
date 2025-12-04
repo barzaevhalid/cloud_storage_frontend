@@ -12,7 +12,6 @@ export default function UploadButton() {
     try {
       const file = await Api.files.uploadFile(options);
       setFileList([]);
-      console.log(file, "rewewe1");
     } catch (err) {
       console.log(err);
       notification.error({
