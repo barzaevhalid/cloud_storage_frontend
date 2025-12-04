@@ -1,0 +1,57 @@
+.root {
+  background-color: #0071ce !important;
+  padding: 10px 0;
+
+  h2 {
+    color: #fff;
+    font-weight: 500;
+    position: relative;
+    top: -2px;
+    font-size: 20px;
+    font-family: "Segoe UI";
+
+    svg {
+      font-size: 24px;
+      position: relative;
+      top: 2px;
+      margin-right: 10px;
+    }
+  }
+
+  :global {
+    .ant-menu {
+      background-color: transparent !important;
+    }
+  }
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+}
+.headerRight {
+  cursor: pointer;
+}
+
+.topMenu {
+  min-width: 200px;
+  :global {
+    .ant-menu-item-selected {
+      color: #ffffff !important;
+      background-color: rgb(255 255 255 / 15%) !important;
+      border-radius: 0 !important;
+    }
+  }
+}
+
+.headerRight {
+  cursor: pointer;
+}

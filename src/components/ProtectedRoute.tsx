@@ -1,13 +1,9 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { parseCookies } from "nookies";
 import { useEffect, useState } from "react";
 import axios from "../core/axios";
 
-interface ProtectedRouteProps {
-  children: React.ReactNode;
-}
-
-export default function ProtectedRoute({ children }: ProtectedRouteProps) {
+export default function ProtectedRoute() {
   const { _token } = parseCookies();
   const [loading, setLoading] = useState(true);
   const [authorized, setAuthorized] = useState(false);
@@ -35,8 +31,8 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   if (loading) return <div>Loading...</div>;
 
   if (!authorized) {
-    return <Navigate to="/dashboard/auth" replace />;
+    return <Navigate to="/auth" replace />;
   }
 
-  return <>{children}</>;
+  return <Outlet />;
 }
