@@ -1,16 +1,22 @@
 import { Avatar, Button, Layout, Menu, Popover } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CloudOutlined } from "@ant-design/icons";
 
 import s from "./Header.module.scss";
 import * as Api from "../../api";
 export const Header = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const hideButton = location.pathname === "/auth";
+
   const onClickLogout = () => {
     if (window.confirm("Are you really want to exit ?")) {
       Api.auth.logout();
-      location.href = "/dashboard/auth";
+      navigate("/auth");
     }
   };
+
   return (
     <Layout.Header className={s.root}>
       <div className={s.headerInner}>
@@ -35,18 +41,20 @@ export const Header = () => {
             ]}
           />
         </div>
-        <div className={s.headerRight}>
-          <Popover
-            trigger="click"
-            content={
-              <Button onClick={onClickLogout} type="primary" danger>
-                Logout
-              </Button>
-            }
-          >
-            <Avatar>A</Avatar>
-          </Popover>
-        </div>
+        {!hideButton && (
+          <div className={s.headerRight}>
+            <Popover
+              trigger="click"
+              content={
+                <Button onClick={onClickLogout} type="primary" danger>
+                  Logout
+                </Button>
+              }
+            >
+              <Avatar>A</Avatar>
+            </Popover>
+          </div>
+        )}
       </div>
     </Layout.Header>
   );

@@ -29,7 +29,7 @@ export const register = async (
 };
 
 export const getMe = async (): Promise<User> => {
-  return (await axios.get("/users/me")).data;
+  return (await axios.get("/me")).data;
 };
 
 export const logout = () => {

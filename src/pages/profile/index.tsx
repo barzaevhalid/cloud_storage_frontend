@@ -2,20 +2,26 @@ import { Button } from "antd";
 import type { User } from "../../api/dto/auth.dto";
 import s from "./Profile.module.scss";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import * as Api from "../../api";
 
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     console.log(user);
-
-    axios.get("/me").then((res) => {
-      setUser(res.data);
-    });
+    const getMe = async () => {
+      const user = await Api.auth.getMe();
+      setUser(user);
+    };
+    getMe();
   }, []);
 
-  const onClickLogout = () => {};
+  const onClickLogout = () => {
+    if (window.confirm("Are you really want to exit ?")) {
+      Api.auth.logout();
+      location.href = "/auth";
+    }
+  };
 
   if (!user) return <div>loading...</div>;
   return (
@@ -26,7 +32,7 @@ export default function ProfilePage() {
         ID: <b>{user.id}</b>
       </p>
       <p>
-        Полное имя: <b>{user.fullName}</b>
+        Полное имя: <b>{user.fullname}</b>
       </p>
       <p>
         E-Mail: <b>{user.email}</b>

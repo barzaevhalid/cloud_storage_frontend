@@ -8,11 +8,15 @@ interface FileCardProps {
   originalName: string;
 }
 export default function FileCard({ filename, originalName }: FileCardProps) {
-  const ext = getExtensionFromFileName(filename);
+  const ext = filename ? getExtensionFromFileName(filename) : "";
   const imageUrl =
-    ext && isImage(ext) ? `http://localhost:8080/uploads/${filename}` : "";
+    filename && ext && isImage(ext)
+      ? `http://localhost:8080/uploads/${filename}`
+      : "";
+
   const color = getColorByExtension(ext);
   const classColor = s[color];
+  console.log(imageUrl, "1 redner");
 
   return (
     <div className={s.root}>
