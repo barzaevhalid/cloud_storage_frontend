@@ -19,7 +19,6 @@ export default function RegisterForm() {
       setCookie(null, "_token", access_token, {
         path: "/",
       });
-      //   location.href = "/dashboard";
     } catch (err) {
       console.log("Registration error:", err);
       notification.error({
